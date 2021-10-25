@@ -69,7 +69,7 @@ function ListView(
 	const {
 		clientIdsTree,
 		draggedClientIds,
-		selectedBlockParentIds,
+		selectedBlockParentClientIds,
 	} = useListViewClientIds( blocks );
 	const { selectBlock } = useDispatch( blockEditorStore );
 	const selectEditorBlock = useCallback(
@@ -150,10 +150,10 @@ function ListView(
 	useEffect( () => {
 		if (
 			! hasFocus &&
-			Array.isArray( selectedBlockParentIds ) &&
-			selectedBlockParentIds.length
+			Array.isArray( selectedBlockParentClientIds ) &&
+			selectedBlockParentClientIds.length
 		) {
-			selectedBlockParentIds.forEach( ( clientId ) => {
+			selectedBlockParentClientIds.forEach( ( clientId ) => {
 				if ( ! expandedState[ clientId ] ) {
 					setExpandedState( {
 						type: 'expand',
@@ -162,7 +162,7 @@ function ListView(
 				}
 			} );
 		}
-	}, [ hasFocus, selectedBlockParentIds ] );
+	}, [ hasFocus, selectedBlockParentClientIds ] );
 
 	return (
 		<AsyncModeProvider value={ true }>
